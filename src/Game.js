@@ -7,8 +7,8 @@ class Game {
     }
 
     update() {
-        this.decideAttack(player, enemy);
-        this.decideAttack(enemy, player);
+        this.decideAttack(this.player, this.enemy);
+        this.decideAttack(this.enemy, this.player);
         this.decideFinish();
     }
 
@@ -74,3 +74,5 @@ class Game {
         }
     }
 }
+
+export default Game;

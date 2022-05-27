@@ -1,7 +1,11 @@
+import Sprite from './Sprite.js';
+import keys from './keys.js';
+
 const gravity = 0.7;
 
 class Fighter extends Sprite {
     constructor({
+        ctx,
         name,
         healthSelector,
         position,
@@ -24,6 +28,7 @@ class Fighter extends Sprite {
             offset,
         });
 
+        this.ctx = ctx;
         this.name = name;
         this.healthSelector = healthSelector;
         this.position = position;
@@ -72,12 +77,12 @@ class Fighter extends Sprite {
         this.attackBox.position.y = this.position.y + this.attackBox.offset.y;
 
         // draw attack box area
-        // ctx.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height);
+        // this.ctx.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height);
 
         this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
 
-        if (this.position.y + this.size.height + this.velocity.y >= ctx.canvas.height - 96) {
+        if (this.position.y + this.size.height + this.velocity.y >= this.ctx.canvas.height - 96) {
             this.velocity.y = 0;
             // this.position.y = 330;
         } else {
@@ -130,12 +135,18 @@ class Fighter extends Sprite {
         }
 
         // overriding all other animations with the attack animation
-        if (this.image === this.sprites.attack1.image && this.framesCurrent < this.sprites.attack1.framesMax - 1) {
+        if (
+            this.image === this.sprites.attack1.image &&
+            this.framesCurrent < this.sprites.attack1.framesMax - 1
+        ) {
             return;
         }
 
         // override when fighter gets  hit
-        if (this.image === this.sprites.takeHit.image && this.framesCurrent < this.sprites.takeHit.framesMax - 1) {
+        if (
+            this.image === this.sprites.takeHit.image &&
+            this.framesCurrent < this.sprites.takeHit.framesMax - 1
+        ) {
             return;
         }
 
@@ -194,3 +205,5 @@ class Fighter extends Sprite {
         }
     }
 }
+
+export default Fighter;

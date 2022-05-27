@@ -1,5 +1,6 @@
 class Sprite {
-    constructor({ position, imageSrc, scale = 1, framesMax = 1, offset = { x: 0, y: 0 } }) {
+    constructor({ ctx, position, imageSrc, scale = 1, framesMax = 1, offset = { x: 0, y: 0 } }) {
+        this.ctx = ctx;
         this.position = position;
         this.image = new Image();
         this.image.src = imageSrc;
@@ -12,7 +13,7 @@ class Sprite {
     }
 
     draw() {
-        ctx.drawImage(
+        this.ctx.drawImage(
             this.image,
             this.framesCurrent * (this.image.width / this.framesMax),
             0,
@@ -42,3 +43,5 @@ class Sprite {
         this.animateFrames();
     }
 }
+
+export default Sprite;

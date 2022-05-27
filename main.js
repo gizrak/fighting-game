@@ -1,3 +1,8 @@
+import Sprite from './src/Sprite.js';
+import Fighter from './src/Fighter.js';
+import Game from './src/Game.js';
+import keys from './src/keys.js';
+
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 
@@ -7,6 +12,7 @@ canvas.height = 576;
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 const background = new Sprite({
+    ctx: ctx,
     position: {
         x: 0,
         y: 0,
@@ -16,6 +22,7 @@ const background = new Sprite({
 console.log(background);
 
 const shop = new Sprite({
+    ctx: ctx,
     position: {
         x: 680,
         y: 250,
@@ -27,6 +34,7 @@ const shop = new Sprite({
 console.log(shop);
 
 const player = new Fighter({
+    ctx: ctx,
     name: 'player',
     healthSelector: '#playerHealth',
     position: {
@@ -97,6 +105,7 @@ const player = new Fighter({
 console.log(player);
 
 const enemy = new Fighter({
+    ctx: ctx,
     name: 'enemy',
     healthSelector: '#enemyHealth',
     position: {
@@ -169,21 +178,6 @@ console.log(enemy);
 const game = new Game(player, enemy, 60);
 console.log(game);
 game.decreaseTimer();
-
-const keys = {
-    a: {
-        pressed: false,
-    },
-    d: {
-        pressed: false,
-    },
-    ArrowLeft: {
-        pressed: false,
-    },
-    ArrowRight: {
-        pressed: false,
-    },
-};
 
 function animate() {
     window.requestAnimationFrame(animate);
